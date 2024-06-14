@@ -1,0 +1,29 @@
+@base_url = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmNlMTgyIiwic3ViIjozMywicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiYWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiY2xpZW50ZSJ9XSwiaWF0IjoxNzE4MzczODAxLCJleHAiOjE3MTgzNzM4NjF9.s5jlUWsklL5U2tG-yQmmDQFvOGSmdeDFjQxoOgIfGIM
+
+
+
+
+### Registro de usuario
+POST {{base_url}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "marce182",
+  "email": "marce182@example.com",
+  "password": "123456",
+  "roles": [1, 2]
+}
+
+### Iniciar sesión de usuario
+POST {{base_url}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "marce182",
+  "password": "123456"
+}
+
+### Obtener datos del usuario autenticado
+GET {{base_url}}/auth/me
+Authorization: Bearer {{token}}

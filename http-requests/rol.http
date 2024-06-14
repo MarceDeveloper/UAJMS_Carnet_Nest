@@ -1,0 +1,24 @@
+### Crear un rol
+POST http://localhost:3000/rol
+Content-Type: application/json
+
+{
+  "name": "cliente"
+}
+
+### Obtener todos los roles
+GET http://localhost:3000/rol
+
+### Obtener un rol por ID
+GET http://localhost:3000/rol/1
+
+### Actualizar un rol
+PATCH http://localhost:3000/rol/1
+Content-Type: application/json
+
+{
+  "name": "superadmin"
+}
+
+### Eliminar un rol
+DELETE http://localhost:3000/rol/1

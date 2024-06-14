@@ -1,0 +1,18 @@
+@base_url = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmNlMTgyIiwic3ViIjozMywiaWF0IjoxNzE4MzY3OTU4LCJleHAiOjE3MTgzNzE1NTh9.5636xf7xmKafBrdgiRE6F7q4JJWdUOidg4Ke8_328yc
+
+
+
+
+### Obtener datos del usuario autenticado
+GET {{base_url}}/auth/me
+Authorization: Bearer {{token}}
+
+### Refrescar token (si tu API tiene esta funcionalidad)
+POST {{base_url}}/auth/refresh
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "refreshToken": "YOUR_REFRESH_TOKEN"
+}
