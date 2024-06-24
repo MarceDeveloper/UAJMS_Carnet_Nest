@@ -49,6 +49,11 @@ export class AuthService {
 
     return {
       access_token: accessToken,
+      data_sesion : {
+        userId: user.id,
+        username: user.username,
+        roles: user.roles,
+      }
     };
   }
 
