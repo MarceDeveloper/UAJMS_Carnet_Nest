@@ -21,6 +21,19 @@ async function main() {
       username: 'admin',
       email: 'admin@example.com',
       password: adminPassword,
+      nombre: 'Administrador',
+      apellido: 'Principal',
+      fecha_nacimiento: new Date('1970-01-01'),
+      direccion: 'Dirección de ejemplo',
+      ci: '12345678',
+      foto_perfil: null, // Asigna un valor o déjalo como null
+      foto_baner: null, // Asigna un valor o déjalo como null
+      color_tema: 'default', // O cualquier color por defecto
+      celular: '555-1234',
+      contador_interaccion_correo: 0,
+      contador_interaccion_whatsapp: 0,
+      contador_interaccion_telefono: 0,
+      contador_interaccion_direccion: 0,
       roles: {
         create: {
           role: {
@@ -28,8 +41,20 @@ async function main() {
           },
         },
       },
+      enlaces: {
+        create: [
+          {
+            url: 'https://example.com',
+            nombre: 'Ejemplo',
+            icon: 'MdLink',
+            contador_interacciones: 0,
+          },
+        ],
+      },
+     
     },
   });
+  
 
   console.log('Seed data created successfully');
 }

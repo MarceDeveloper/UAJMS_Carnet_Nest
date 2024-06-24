@@ -8,11 +8,27 @@ datasource db {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  username String    @unique
-  email    String    @unique
-  password String
-  roles    UserRole[]
+  id                            Int       @id @default(autoincrement())
+  username                      String    @unique
+  email                         String    @unique
+  password                      String
+  roles                         UserRole[]
+  // Campos adicionales para la información del usuario
+  nombre                        String    @db.VarChar(255)
+  apellido                      String    @db.VarChar(255)
+  fecha_nacimiento              DateTime  @db.Timestamp(6)
+  direccion                     String    @default("") @db.VarChar(255)
+  ci                            String    @default("") @db.VarChar(255)
+  foto_perfil                   String?   @db.VarChar(255)
+  foto_baner                    String?   @db.VarChar(255)
+  color_tema                    String?   @db.VarChar(50)
+  celular                       String    @db.VarChar(50)
+  contador_interaccion_correo   Int       @default(0) @db.Int
+  contador_interaccion_whatsapp Int       @default(0) @db.Int
+  contador_interaccion_telefono Int       @default(0) @db.Int
+  contador_interaccion_direccion Int      @default(0) @db.Int
+  enlaces                       Enlace[]
+  carreras                      UsuarioCarrera[]
 }
 
 model Role {
@@ -28,4 +44,29 @@ model UserRole {
   role   Role @relation(fields: [roleId], references: [id])
 
   @@id([userId, roleId])
+}
+
+model Enlace {
+  id                     Int     @id @default(autoincrement())
+  url                    String  @db.VarChar(1255)
+  nombre                 String  @default("")
+  icon                   String  @default("MdLink")
+  contador_interacciones Int?    @default(0)
+  usuario_id             Int
+  usuario                User @relation(fields: [usuario_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Carrera {
+  id       Int              @id @default(autoincrement())
+  nombre   String           @unique @db.VarChar(255)
+  usuarios UsuarioCarrera[]
+}
+
+model UsuarioCarrera {
+  usuarioId Int
+  carreraId Int
+  usuario   User @relation(fields: [usuarioId], references: [id])
+  carrera   Carrera @relation(fields: [carreraId], references: [id])
+
+  @@id([usuarioId, carreraId])
 }

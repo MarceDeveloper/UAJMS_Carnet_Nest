@@ -49,16 +49,35 @@ export class AuthService {
 
     return {
       access_token: accessToken,
-      data_sesion : {
+      data_sesion: {
         userId: user.id,
         username: user.username,
         roles: user.roles,
-      }
+      },
     };
   }
 
   async register(createUserDto: CreateUserDto) {
-    const { username, email, password, roles } = createUserDto;
+    const {
+      username,
+      email,
+      password,
+      nombre,
+      apellido,
+      fecha_nacimiento,
+      direccion,
+      ci,
+      foto_perfil,
+      foto_baner,
+      color_tema,
+      celular,
+      contador_interaccion_correo,
+      contador_interaccion_whatsapp,
+      contador_interaccion_telefono,
+      contador_interaccion_direccion,
+      roles,
+    } = createUserDto;
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     if (!(await is_validateRoles(this.prisma, roles))) {
@@ -70,19 +89,32 @@ export class AuthService {
         username,
         email,
         password: hashedPassword,
+        nombre,
+        apellido,
+        fecha_nacimiento: new Date(fecha_nacimiento),
+        direccion,
+        ci,
+        foto_perfil,
+        foto_baner,
+        color_tema,
+        celular,
+        contador_interaccion_correo,
+        contador_interaccion_whatsapp,
+        contador_interaccion_telefono,
+        contador_interaccion_direccion,
         roles: {
           create: roles.map(roleId => ({
             role: { connect: { id: roleId } }
-          }))
-        }
+          })),
+        },
       },
       include: {
         roles: {
           include: {
-            role: true
-          }
-        }
-      }
+            role: true,
+          },
+        },
+      },
     });
 
     const userWithRoles: UserWithRoles = {
